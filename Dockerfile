@@ -17,8 +17,8 @@ RUN apt-get update -y
 
 # Essentials
 RUN apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
-     build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
-     xz-utils debianutils iputils-ping vim bc g++-multilib
+     build-essential chrpath socat cpio python python3 python3-pip \
+     python3-pexpect xz-utils debianutils iputils-ping vim bc g++-multilib
 
 # Graphical and Eclipse Plug-In Extras
 RUN apt-get install -y libsdl1.2-dev xterm
@@ -32,7 +32,7 @@ RUN apt-get install -y python-git
 # Extra package for build with NXP's images
 RUN apt-get install -y \
     sed cvs subversion coreutils texi2html \
-    python-pysqlite2 help2man  gcc g++ \
+    python-pysqlite2 help2man gcc g++ \
     desktop-file-utils libgl1-mesa-dev libglu1-mesa-dev mercurial \
     autoconf automake groff curl lzop asciidoc u-boot-tools
 
@@ -54,6 +54,7 @@ RUN \
   rm -rf /var/cache/oracle-jdk8-installer
 
 # Set the locale, else yocto will complain
+RUN apt-get install -y locales
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
